@@ -33,9 +33,12 @@ def signin(request):
 
         logging_user = authenticate(username=username_fetched, password=pass1_fetched)
 
-        login(request,logging_user)
-
-        return redirect("home")
+        if logging_user is not None:
+            login(request, logging_user)  # Log in the user
+            return redirect("home")  # Redirect to the home page
+        else:
+            return render(request, "users/signin.html", {"error": "Invalid credentials"})
+        
 
 
     return render(request, "users/signin.html")
