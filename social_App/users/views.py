@@ -9,7 +9,6 @@ def index(request):
     return render(request, "users/index.html")
 
 
-
 def signup(request):
     if request.method == 'POST':
         username_fetched = request.POST["username"]
@@ -46,3 +45,9 @@ def signin(request):
 
 def home(request):
     return render(request,"users/home.html")
+
+def profile(request):
+    return render(request, "users/profile.html")
+
+def logout(request):
+    return render(request, "users/index.html")
