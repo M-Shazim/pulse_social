@@ -67,7 +67,6 @@ def signup(request):
     return render(request, "users/signup.html")
 
 
-
 def signin(request):
 
     if request.method == "POST":
@@ -91,10 +90,11 @@ def home(request):
 def profile(request):
     return render(request, "users/profile.html")
 
-def logout(request):
+def logout_user(request):
     logout(request)
     messages.success(request, "Logged out successfully! ")
-    return render(request, "users/index.html")
+    return redirect("index")
+
 
 def activate(request, uidb64, token):
     try:
