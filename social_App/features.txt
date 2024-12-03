@@ -1,0 +1,7 @@
+1 - Registeration auth only for specific email address
+2 - For guest user, using sessions
+3 - Fixing the home page layout
+4 - Fixing access to other pages without login
+
+
+Later issues would be added here:

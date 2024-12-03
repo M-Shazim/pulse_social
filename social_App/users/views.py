@@ -10,6 +10,7 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str
 from .tokens import generate_token
 from django.core.mail import send_mail, EmailMessage
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -83,10 +84,16 @@ def signin(request):
         
     return render(request, "users/signin.html")
 
-
+@login_required
 def home(request):
-    return render(request,"users/home.html")
+    if(User.is_authenticated):
 
+        return render(request,"users/home.html")
+    
+    else:
+        return render(request, "users/signin.html")
+    
+@login_required
 def profile(request):
     return render(request, "users/profile.html")
 
