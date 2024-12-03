@@ -12,11 +12,6 @@ from .tokens import generate_token
 from django.core.mail import send_mail, EmailMessage
 from django.contrib.auth.decorators import login_required
 
-
-
-
-
-
 # Create your views here.
 
 
