@@ -147,6 +147,12 @@
                     </div>
                 </div>
             </div>
+
+            {% for instance in all_posts %}
+                <h3>{{instance.title}}</h3>
+                <p>{{instance.description}}</p>
+
+            {% endfor %}
         </div>
 
         <!-- Profile Image Section -->

@@ -11,6 +11,7 @@ from django.utils.encoding import force_bytes, force_str
 from .tokens import generate_token
 from django.core.mail import send_mail, EmailMessage
 from django.contrib.auth.decorators import login_required
+from . import models
 
 # Create your views here.
 
@@ -82,8 +83,12 @@ def signin(request):
 @login_required
 def home(request):
     if(User.is_authenticated):
+        posts = models.Post.objects.all()
+        
 
-        return render(request,"users/home.html")
+        return render(request,"users/home.html", {
+            "all_posts" : posts
+        })
     
     else:
         return render(request, "users/signin.html")
