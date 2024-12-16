@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{post.title}}</title>
+
+    <style>
+        /* Global Styles */
+        #comment-form{
+            margin: 3rem auto;
+            width: 90%;
+            max-width: 40rem;
+            border-radius: 12px;
+            background-color: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+            padding: 1rem;
+          }
+          
+          #comment-form button{
+            font: inherit;
+            background-color: #390281;
+            color: white;
+            border: 1px solid #390281;
+            padding: 0.5rem 1.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+          }
+          
+          #comment-form button:hover,
+          #comment-form button:active{
+            background-color: #4f0ba7;
+            border-color: #4f0ba7;
+          }
+          
+          .form-control{
+            margin-bottom: 1rem;
+          
+          }
+          
+          .form-control label{
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            display: block;
+          
+          }
+          
+          .form-control input,
+          .form-control textarea{
+            display: block;
+            width: 100%;
+            font: inherit;
+            padding: 0.25rem;
+            border-radius: 6px;
+            resize: none;
+            border: 1px solid #ccc;
+          }
+          
+          .errorlist {
+            list-style: none;
+            margin: 0.5rem 0;
+            padding: 0;
+            color: #d6000b;
+          
+          }
+          
+          .invalid label{
+            color: #d6000b;
+          
+          }
+          
+          .invalid input,
+          .invalid textarea{
+            border-color: #d6000b;
+            background-color: #ffe6e7;
+          }
+          
+          #alert{
+            margin: 8rem auto 3rem auto;
+            border: 1px solid #d6000b;
+            background-color: #e7e7e7;
+            padding: 1rem;
+            width: 90%;
+            max-width: 40rem;
+          }
+          
+          #alert a{
+            text-decoration: none;
+            border: 1px solid #d6000b;
+            background-color: #d6000b;
+            color: white;
+            padding: 0.25rem 1.5rem;
+            border-radius: 6px;
+          
+          }
+          
+          #comments {
+            margin: 3rem auto;
+            width: 90%;
+            max-width: 40rem;
+            border-radius: 12px;
+            background-color: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+            padding: 1rem 2rem;
+          }
+          
+          #comments ul{
+            list-style: none;
+            margin: 0;
+            padding: 0;
+          
+          }
+          
+          #comments li{
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #ccc;
+          
+          } 
+          
+          #comments li:last-of-type{
+            border-bottom: none;
+          }
+          
+          #comments h2{
+            color: #464646;
+          }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: springgreen;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Header Section */
+        header {
+            background-color: bisque;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            color: #333;
+            margin: 0;
+        }
+
+        nav {
+            display: flex;
+            gap: 20px;
+        }
+
+        nav a {
+            color: #333;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: darksalmon;
+        }
+
+        /* Main Content */
+        main {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            flex-grow: 1;
+        }
+
+        .content {
+            width: 70%;
+        }
+
+        .profile {
+            width: 25%;
+            text-align: center;
+        }
+
+        .profile img {
+            width: 100%;
+            max-width: 150px;
+            border-radius: 50%;
+        }
+
+        .question {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .question h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .question p {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        .replies {
+            margin-top: 15px;
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .replies h4 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .reply {
+            padding: 10px;
+            background-color: #fff;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            background-color: bisque;
+            padding: 10px;
+            text-align: center;
+        }
+</style>
+
+</head>
+<body>
+    <header>
+        <h1>Welcome to the QRS Site</h1>
+        <nav>
+            <a href="/home">Home</a>
+            <a href="/profile">Profile</a>
+            <a href="/logout">Logout</a>
+        </nav>
+    </header>
+
+    <h2><a href="{% url "home" %}">Go Back</a></h2>
+
+    <article class="question">
+        <a href="{% url 'post-detail-page' post.slug %}">        
+            <div class="post__content">
+                <h3>{{ post.title }}</h3>
+                <p>{{ post.description }}</p>
+            </div>
+        </a>
+
+        <section id="replies">
+            <div class="reply">
+                <ul>
+                    {% for comment in comments %}
+                        <li>
+                            <h2>{{ comment.author.registration_number }}</h2>
+                            <p>{{ comment.text|linebreaks }}</p>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </section>
+
+    </article>
+
+
+    <section id="comment-form">
+        <h2>Your Comment</h2>
+        <form action="{% url 'post-detail-page' post.slug %}" method="POST"> 
+            {% csrf_token %}
+
+            {% for field in comment_form %}
+
+            <div class="form-control {% if field.errors %}invalid{% endif %}">
+                {{ field.label_tag }}
+                {{ field }}
+                {{ field.errors }}
+            </div>
+
+            {% endfor %}
+            
+            <button>Save Comment</button>
+        </form>
+    </section>
+    
+</body>
+</html>
