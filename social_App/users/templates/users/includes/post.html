@@ -1,128 +1,135 @@
 <style>
-        /* Global Styles */
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            background-color: springgreen;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f4f7fb;
+        margin: 0;
+        padding: 0;
+    }
 
-        /* Header Section */
-        header {
-            background-color: bisque;
-            padding: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+    .posts-container {
+        position: relative;
+        width: 50vw;
+        margin: 20px auto;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        transition: transform 0.3s ease;
+    }
 
-        header h1 {
-            font-size: 1.8rem;
-            color: #333;
-            margin: 0;
-        }
+    .posts-container:hover {
+        transform: translateY(-10px);
+    }
 
-        nav {
-            display: flex;
-            gap: 20px;
-        }
+    .post__content {
+        padding: 20px;
+        color: #333;
+    }
 
-        nav a {
-            color: #333;
-            text-decoration: none;
-            font-size: 1rem;
-            transition: color 0.3s;
-        }
+    .title_date {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+    }
 
-        nav a:hover {
-            color: darksalmon;
-        }
+    .title_date h3 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #2c3e50;
+        margin: 0;
 
-        /* Main Content */
-        main {
-            display: flex;
-            justify-content: space-between;
-            padding: 20px;
-            flex-grow: 1;
-        }
+    }
 
-        .content {
-            width: 70%;
-        }
+    .title_date p {
+        font-size: 0.9rem;
+        color: #95a5a6;
+        margin: 0;
+    }
 
-        .profile {
-            width: 25%;
-            text-align: center;
-        }
+    .by {
+        font-size: 0.9rem;
+        color: #7f8c8d;
+    }
 
-        .profile img {
-            width: 100%;
-            max-width: 150px;
-            border-radius: 50%;
-        }
+    .by strong {
+        color: #2c3e50;
+    }
 
-        .question {
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-        }
+    .title_date p {
+        color: #7f8c8d;
+        font-style: italic;
+    }
 
-        .question h3 {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-        }
+    .post__content p {
+        font-size: 1rem;
+        line-height: 1.5;
+        color: #34495e;
+    }
 
-        .question p {
-            font-size: 1rem;
-            color: #555;
-        }
+    a {
+        text-decoration: none;
+    }
 
-        .replies {
-            margin-top: 15px;
-            background-color: #f9f9f9;
-            padding: 10px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-        }
+    a:hover {
+        text-decoration: none;
+    }
 
-        .replies h4 {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-        }
+    .subject, .teacher {
+        font-size: 0.9rem;
+        margin-top: 10px;
+        color: #7f8c8d;
+    }
 
-        .reply {
-            padding: 10px;
-            background-color: #fff;
-            margin-bottom: 10px;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
+    .subject strong, .teacher strong {
+        color: #2c3e50;
+    }
 
-        footer {
-            background-color: bisque;
-            padding: 10px;
-            text-align: center;
-        }
+    .read-more {
+        text-align: center;
+        background-color: #16a085;
+        color: white;
+        padding: 10px 20px;
+        margin-left: 20px;
+        margin-top: 20px;
+        font-weight: 500;
+        text-decoration: none;
+        display: inline-block;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+    .read-more:hover {
+        background-color: #1abc9c;
+    }
+
+    .posts-container:hover .read-more {
+        background-color: #1abc9c;
+    }
 </style>
 
-<li>
+
+<div class="posts-container">
     <article class="question">
-        <a href="{% url 'post-detail-page' post.slug %}">        
+        <a href="{% url 'post-detail-page' post.slug %}">
             <div class="post__content">
-                <h3>{{ post.title }}</h3>
-                <p>{{ post.description }}</p>
-                <p>Subject: {{post.subject}}</p>
-                <p>Teacher: {{post.teacher}}</p>
-                <p>By: {{post.author}}</p>
-                <p>Reg no: {{post.author.registration_number}}</p>
+                <p class="by"><strong>By:</strong> {{ post.author }}</p>
+                <p><strong>Reg No:</strong> {{ post.author.registration_number }}</p>
+                <hr>
+
+                <div class="title_date">
+                    <h3>{{ post.title }}</h3>
+
+                    <p>{{post.posted_on}}</p>
+
+                </div>
+                <p><strong></strong> {{ post.description }}</p> <!--Description:-->
 
 
+                <p class="subject"><strong>Subject:</strong> {{ post.subject }}</p>
+                <p class="teacher"><strong>Teacher:</strong> {{ post.teacher }}</p>
             </div>
+            <p class="read-more">Read More &rarr;</p>
         </a>
     </article>
-</li>
+</div>
