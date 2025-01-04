@@ -19,7 +19,7 @@ The Faculty Feedback System is a web-based application designed to collect, mana
 
 ---
 
-## **System Workflow**
+## **Workflow**
 1. **Login**: Students and administrators log in using their credentials.
 2. **Feedback Submission**: Students complete and submit their feedback anonymously.
 3. **Data Processing**: The system stores feedback securely in the database.
@@ -27,3 +27,4 @@ The Faculty Feedback System is a web-based application designed to collect, mana
 
 ---
 
+## The Project will soon be hosted!
